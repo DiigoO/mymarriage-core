@@ -12,7 +12,7 @@ public class UserController {
     @Autowired
     public UserService userService;
 
-    @GetMapping("/user/{user}")
+    @GetMapping("/search/{user}")
     public User buscarUser(@PathVariable(value = "user") String user){
 
         return userService.buscarUser(user);
@@ -21,6 +21,12 @@ public class UserController {
     @PostMapping()
     public void salvarUser(@RequestBody User user){
         userService.saveUser(user);
+    }
+
+    @PostMapping("/login/")
+    public boolean login(@RequestBody User user){
+
+        return userService.login(user.getNome(), user.getPassword());
     }
 
 }
